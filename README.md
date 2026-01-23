@@ -1,28 +1,55 @@
 # Video Parser
 
-**基于 FastAPI + Gradio + Qwen3-VL 的多平台视频解析、下载与AI内容提取系统**
+> 基于 FastAPI + Gradio + Qwen3-VL 的多平台视频解析、下载与 AI 内容提取系统
 
-[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)
-[![Gradio](https://img.shields.io/badge/Gradio-5.0+-orange.svg)](https://gradio.app/)
-[![Qwen3-VL](https://img.shields.io/badge/Qwen3--VL-AI-purple.svg)](https://modelscope.cn/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-
----
-
-**在线体验**： [点击体验](https://www.scnet.cn/ui/aihub/agent/wwxiaohuihui/video-parser)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![FastAPI](https://img.shields.io/badge/fastapi-0.115+-green.svg)
+![Gradio](https://img.shields.io/badge/gradio-5.0+-orange.svg)
+![Qwen3-VL](https://img.shields.io/badge/qwen3--vl-AI-purple.svg)
 
 ---
 
-## 功能特性
+## 在线体验
 
-- **多平台支持**：抖音、哔哩哔哩、小红书、快手、好看视频等
-- **无水印下载**：智能解析视频直链，绕过水印限制
-- **在线播放**：支持浏览器内直接播放视频
-- **AI内容提取**：基于 Qwen3-VL 模型智能分析视频内容
-- **Web 界面**：基于 Gradio 的友好操作界面
-- **RESTful API**：标准化接口，支持二次开发
-- **自动文档**：FastAPI 自动生成 Swagger/ReDoc 文档
+无需部署，直接访问体验：
+
+| 访问方式 | 地址 |
+|---------|------|
+| 🦆 SCNet AIHub | https://www.scnet.cn/ui/aihub/agent/wwxiaohuihui/video-parser |
+
+⚡ 即开即用，体验多平台视频解析与 AI 内容提取！
+
+---
+
+## 项目介绍
+
+Video Parser 是一个专业的 AI 驱动视频解析与内容提取系统，支持多平台无水印视频下载，并集成 Qwen3-VL 视觉语言模型智能分析视频内容。
+
+### 核心特性
+
+- **多平台支持**: 抖音、哔哩哔哩、小红书、快手、好看视频等
+- **无水印下载**: 智能解析视频直链，绕过水印限制
+- **在线播放**: 支持浏览器内直接播放视频
+- **AI 内容提取**: 基于 Qwen3-VL 模型智能分析视频内容
+- **Web 界面**: 基于 Gradio 的友好操作界面
+- **RESTful API**: 标准化接口，支持二次开发
+- **自动文档**: FastAPI 自动生成 Swagger/ReDoc 文档
+
+---
+
+## 功能清单
+
+| 功能名称 | 功能说明 | 技术栈 | 状态 |
+|---------|---------|--------|------|
+| 多平台解析 | 支持抖音、B站、小红书等平台 | Python + BeautifulSoup | ✅ 稳定 |
+| 无水印下载 | 智能解析直链，绕过水印 | httpx + requests | ✅ 稳定 |
+| 在线播放 | 浏览器直接播放 | Gradio + HTML5 | ✅ 稳定 |
+| AI 内容提取 | Qwen3-VL 智能分析视频 | OpenAI SDK + Qwen3-VL | ✅ 稳定 |
+| Web 界面 | Gradio 友好操作界面 | Gradio 5.0+ | ✅ 稳定 |
+| RESTful API | 标准接口支持二次开发 | FastAPI 0.115+ | ✅ 稳定 |
+| 自动文档 | Swagger/ReDoc 文档 | FastAPI | ✅ 稳定 |
+| Docker 部署 | 一键容器化部署 | Docker + Compose | ✅ 稳定 |
 
 ---
 
@@ -36,63 +63,42 @@
 
 ---
 
-## 快速开始
+## 技术架构
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| Python | 3.10+ | 主要开发语言 |
+| FastAPI | 0.115+ | Web 框架 |
+| Gradio | 5.0+ | Web UI 框架 |
+| Qwen3-VL | latest | AI 视觉语言模型 |
+| httpx | latest | HTTP 客户端 |
+| Uvicorn | 0.34+ | ASGI 服务器 |
+| Pydantic | 2.5+ | 数据验证 |
+| BeautifulSoup | 4.12+ | HTML 解析 |
+
+---
+
+## 安装说明
+
+### 环境要求
+
+- Python 3.10+
+- ffmpeg（B站视频合并需要）
+- Docker / Docker Compose（可选）
+
+### 安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## 使用说明
 
 ### 方式一：Docker 部署（推荐）
 
-#### 1. 环境要求
-
-- Docker 20.10+
-- Docker Compose 2.0+（可选）
-
-#### 2. 使用 Docker Compose（推荐）
-
-```bash
-# 克隆项目
-git clone https://github.com/wwwzhouhui/video-parser.git
-cd video-parser
-
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，填入 QWEN_API_KEY
-
-# 构建并启动服务
-docker-compose up -d
-
-# 查看日志
-docker-compose logs -f
-```
-
-#### 3. 使用 Docker 命令
-
-```bash
-# 配置环境变量
-cp .env.example .env
-# 编辑 .env 文件，填入 QWEN_API_KEY
-
-# 打包镜像
-docker build -t video-parser:latest .
-
-# 运行容器（使用 --env-file 加载环境变量）
-docker run -d \
-  --name video-parser \
-  -p 5001:5001 \
-  -p 7860:7860 \
-  --env-file .env \
-  -v $(pwd)/static/videos:/app/static/videos \
-  -v $(pwd)/downloads:/app/downloads \
-  -v $(pwd)/cache:/app/cache \
-  -v $(pwd)/logs:/app/logs \
-  --restart unless-stopped \
-  video-parser:latest
-
-# 查看日志
-docker logs -f video-parser
-```
-
-#### 4. 环境变量配置
-
-在运行 Docker 前，需要创建 `.env` 文件：
+#### 1. 配置环境变量
 
 ```bash
 cp .env.example .env
@@ -115,54 +121,40 @@ vim .env  # 编辑配置
 
 > API 密钥获取地址：https://modelscope.cn/my/myaccesstoken
 
-#### 5. 访问应用
+#### 2. 使用 Docker Compose
+
+```bash
+# 构建并启动服务
+docker-compose up -d
+
+# 查看日志
+docker-compose logs -f
+```
+
+#### 3. 使用 Docker 命令
+
+```bash
+# 打包镜像
+docker build -t video-parser:latest .
+
+# 运行容器
+docker run -d \
+  --name video-parser \
+  -p 5001:5001 \
+  -p 7860:7860 \
+  --env-file .env \
+  -v $(pwd)/static/videos:/app/static/videos \
+  -v $(pwd)/downloads:/app/downloads \
+  -v $(pwd)/cache:/app/cache \
+  -v $(pwd)/logs:/app/logs \
+  --restart unless-stopped \
+  video-parser:latest
+```
+
+#### 4. 访问应用
 
 - **Web 界面**：http://localhost:7860
 - **API 文档**：http://localhost:5001/docs
-
-#### 6. 常用命令
-
-```bash
-# ===== Docker Compose 命令 =====
-# 停止服务
-docker-compose down
-
-# 重新构建并启动
-docker-compose up -d --build
-
-# 查看服务状态
-docker-compose ps
-
-# 查看实时日志
-docker-compose logs -f
-
-# ===== Docker 命令 =====
-# 停止容器
-docker stop video-parser
-
-# 启动容器
-docker start video-parser
-
-# 重启容器
-docker restart video-parser
-
-# 删除容器
-docker rm -f video-parser
-
-# 进入容器
-docker exec -it video-parser bash
-
-# 查看容器状态
-docker ps -a | grep video-parser
-
-# 查看镜像
-docker images | grep video-parser
-
-# 删除镜像
-docker rmi video-parser:latest
-```
-
----
 
 ### 方式二：本地部署
 
@@ -174,8 +166,6 @@ docker rmi video-parser:latest
 #### 2. 安装依赖
 
 ```bash
-git clone https://github.com/wwwzhouhui/video-parser.git
-cd video-parser
 pip install -r requirements.txt
 ```
 
@@ -188,17 +178,6 @@ cp .env.example .env
 # 编辑 .env 文件，配置 API 密钥
 vim .env
 ```
-
-**.env 配置项说明：**
-
-| 变量名 | 说明 | 默认值 |
-|--------|------|--------|
-| `QWEN_API_BASE_URL` | Qwen API 基础地址 | `https://api-inference.modelscope.cn/v1` |
-| `QWEN_API_KEY` | ModelScope API 密钥 | 无（必填） |
-| `QWEN_MODEL_ID` | 模型 ID | `Qwen/Qwen3-VL-8B-Instruct` |
-| `MAX_FRAMES` | 视频分析提取帧数 | `6` |
-
-> API 密钥获取：https://modelscope.cn/my/myaccesstoken
 
 #### 4. 启动服务
 
@@ -219,6 +198,123 @@ python app.py
 - **Web 界面**：http://localhost:7860
 - **API 文档**：http://localhost:5001/docs
 - **ReDoc 文档**：http://localhost:5001/redoc
+
+---
+
+## 配置说明
+
+### 环境变量配置
+
+| 变量名 | 说明 | 默认值 |
+|--------|------|--------|
+| `QWEN_API_BASE_URL` | Qwen API 基础地址 | `https://api-inference.modelscope.cn/v1` |
+| `QWEN_API_KEY` | ModelScope API 密钥 | 无（必填） |
+| `QWEN_MODEL_ID` | 模型 ID | `Qwen/Qwen3-VL-8B-Instruct` |
+| `MAX_FRAMES` | 视频分析提取帧数 | `6` |
+| `API_SERVER_URL` | 后端 API 服务地址 | `http://127.0.0.1:5001` |
+| `DOMAIN` | 服务域名（生产环境） | 无 |
+
+---
+
+## 项目结构
+
+```
+video-parser/
+├── api.py                 # FastAPI 后端服务入口
+├── app.py                 # Gradio 前端界面（含AI内容提取）
+├── qwen3vl.py             # AI视频内容分析工具（命令行版）
+├── requirements.txt       # Python 依赖
+├── Dockerfile             # Docker 镜像配置
+├── docker-compose.yml     # Docker Compose 配置
+├── docker-entrypoint.sh   # Docker 启动脚本
+├── .env.example           # 环境变量示例
+├── configs/               # 配置文件
+│   ├── general_constants.py
+│   ├── logging_config.py
+│   └── business_config.json
+├── src/
+│   ├── api/               # API 路由
+│   ├── downloaders/       # 各平台下载器实现
+│   │   ├── base_downloader.py
+│   │   ├── douyin_downloader.py
+│   │   ├── bilibili_downloader.py
+│   │   ├── xiaohongshu_downloader.py
+│   │   ├── kuaishou_downloader.py
+│   │   └── haokan_downloader.py
+│   └── downloader_factory.py
+├── utils/                 # 工具函数
+│   ├── web_fetcher.py
+│   ├── vigenere_cipher.py
+│   └── common_utils.py
+├── static/                # 静态资源
+│   └── videos/            # 下载的视频
+├── downloads/             # Gradio 下载目录
+└── cache/                 # 播放缓存目录
+```
+
+---
+
+## 开发指南
+
+### 本地开发
+
+```bash
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+vim .env
+
+# 启动后端 API 服务
+python api.py
+
+# 启动 Gradio 前端
+python app.py
+```
+
+### Docker 开发
+
+```bash
+# 使用 Docker Compose
+docker-compose up -d --build
+
+# 查看日志
+docker-compose logs -f
+
+# 停止服务
+docker-compose down
+```
+
+### 常用命令
+
+```bash
+# ===== Docker Compose 命令 =====
+# 停止服务
+docker-compose down
+
+# 重新构建并启动
+docker-compose up -d --build
+
+# 查看服务状态
+docker-compose ps
+
+# ===== Docker 命令 =====
+# 停止容器
+docker stop video-parser
+
+# 启动容器
+docker start video-parser
+
+# 重启容器
+docker restart video-parser
+
+# 删除容器
+docker rm -f video-parser
+
+# 进入容器
+docker exec -it video-parser bash
+```
 
 ---
 
@@ -285,43 +381,6 @@ X-EGCT-Text: 加密后的文本
 
 ---
 
-## 项目结构
-
-```
-video-parser/
-├── api.py                 # FastAPI 后端服务入口
-├── app.py                 # Gradio 前端界面（含AI内容提取）
-├── qwen3vl.py             # AI视频内容分析工具（命令行版）
-├── requirements.txt       # Python 依赖
-├── Dockerfile             # Docker 镜像配置
-├── docker-compose.yml     # Docker Compose 配置
-├── docker-entrypoint.sh   # Docker 启动脚本
-├── configs/               # 配置文件
-│   ├── general_constants.py
-│   ├── logging_config.py
-│   └── business_config.json
-├── src/
-│   ├── api/               # API 路由
-│   ├── downloaders/       # 各平台下载器实现
-│   │   ├── base_downloader.py
-│   │   ├── douyin_downloader.py
-│   │   ├── bilibili_downloader.py
-│   │   ├── xiaohongshu_downloader.py
-│   │   ├── kuaishou_downloader.py
-│   │   └── haokan_downloader.py
-│   └── downloader_factory.py
-├── utils/                 # 工具函数
-│   ├── web_fetcher.py
-│   ├── vigenere_cipher.py
-│   └── common_utils.py
-├── static/                # 静态资源
-│   └── videos/            # 下载的视频
-├── downloads/             # Gradio 下载目录
-└── cache/                 # 播放缓存目录
-```
-
----
-
 ## 示例链接
 
 | 平台 | 示例地址 |
@@ -334,30 +393,6 @@ video-parser/
 
 ---
 
-## 开发说明
-
-### 添加新平台支持
-
-1. 在 `src/downloaders/` 下创建新的下载器类
-2. 继承 `BaseDownloader` 基类
-3. 实现 `get_title_content()`、`get_real_video_url()`、`get_cover_photo_url()` 方法
-4. 在 `src/downloader_factory.py` 中注册新平台
-5. 在 `configs/business_config.json` 中添加域名映射
-
-### 运行测试
-
-```bash
-# 测试后端 API
-curl -X POST http://localhost:5001/api/parse \
-  -H "Content-Type: application/json" \
-  -H "X-Timestamp: $(date +%s)000" \
-  -H "X-GCLT-Text: test" \
-  -H "X-EGCT-Text: test" \
-  -d '{"text": "https://www.bilibili.com/video/BV1TaqYBcEJc"}'
-```
-
----
-
 ## AI 视频内容提取
 
 本项目集成了 Qwen3-VL 视觉语言模型，可智能分析视频内容并生成文字描述。
@@ -365,20 +400,9 @@ curl -X POST http://localhost:5001/api/parse \
 ### Web 界面使用
 
 1. 解析视频链接
-
-   ![image-20251227160812620](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20251227160812620.png)
-
 2. 点击「在线播放」加载视频
-
-   ![image-20251227160929670](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20251227160929670.png)
-
 3. 点击「AI提取视频内容」按钮
-
-   ![image-20251227161006218](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20251227161006218.png)
-
 4. 等待 AI 分析完成，查看内容描述
-
-   ![image-20251227161017867](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20251227161017867.png)
 
 ### 命令行工具
 
@@ -408,18 +432,81 @@ python qwen3vl.py --interactive
 
 ---
 
-## 注意事项
+## 常见问题
 
-- B 站视频为音视频分离，需要安装 ffmpeg 进行合并
-- 部分平台可能需要特殊的请求头（Referer）才能下载
-- 视频链接有时效性，解析后请尽快下载
-- AI内容提取需要先播放视频（加载到本地缓存）
-- AI内容提取依赖 ffmpeg 提取视频帧
+<details>
+<summary>Q: B 站视频无法下载？</summary>
+
+A: B 站视频为音视频分离，需要安装 ffmpeg 进行合并。使用 `sudo apt install ffmpeg`（Ubuntu）或 `brew install ffmpeg`（macOS）安装。
+</details>
+
+<details>
+<summary>Q: 部分平台视频无法下载？</summary>
+
+A: 某些平台可能需要特殊的请求头（Referer）才能下载，可以在代码中添加相应请求头。
+</details>
+
+<details>
+<summary>Q: AI 内容提取失败？</summary>
+
+A: AI 内容提取需要先播放视频（加载到本地缓存），并确保 ffmpeg 已安装用于提取视频帧。
+</details>
+
+<details>
+<summary>Q: 视频链接有时效性吗？</summary>
+
+A: 是的，视频链接有时效性，解析后请尽快下载。
+</details>
+
+<details>
+<summary>Q: 如何添加新平台支持？</summary>
+
+A: 在 `src/downloaders/` 下创建新的下载器类，继承 `BaseDownloader` 基类，实现相关方法，然后在 `downloader_factory.py` 中注册。
+</details>
 
 ---
 
-## 开源协议
+## 技术交流群
 
-本项目基于 [MIT License](LICENSE) 开源。
+欢迎加入技术交流群，分享你的使用心得和反馈建议：
 
-**免责声明**：本项目仅供学习交流使用，请勿用于非法用途。因使用本项目造成的任何后果，由使用者自行承担。
+![技术交流群](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20260122235736120.png)
+
+---
+
+## 作者联系
+
+- **微信**: laohaibao2025
+- **邮箱**: 75271002@qq.com
+
+![微信二维码](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Screenshot_20260123_095617_com.tencent.mm.jpg)
+
+---
+
+## 打赏
+
+如果这个项目对你有帮助，欢迎请我喝杯咖啡 ☕
+
+**微信支付**
+
+![微信支付](https://mypicture-1258720957.cos.ap-nanjing.myqcloud.com/Obsidian/image-20250914152855543.png)
+
+---
+
+## Star History
+
+如果觉得项目不错，欢迎点个 Star ⭐
+
+[![Star History Chart](https://api.star-history.com/svg?repos=wwwzhouhui/video-parser&type=Date)](https://star-history.com/#wwwzhouhui/video-parser&Date)
+
+---
+
+## License
+
+MIT License
+
+---
+
+## 免责声明
+
+本项目仅供学习交流使用，请勿用于非法用途。因使用本项目造成的任何后果，由使用者自行承担。
